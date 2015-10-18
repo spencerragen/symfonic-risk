@@ -1,0 +1,14 @@
+
+{% for player in players %}
+    <div class="dist_table">
+        <div class="dist_row">
+            <div class="dist_row"><div class="dist_header empire_name empire{{player.empire.id}}">{{ player.empire.name }}</div></div>
+            <div class="dist_row"><div class="dist_cell empire_name empire{{player.empire.id}}">{{ player.capitol.name }} <img src="{{ asset('capitol.png') }}" /></div></div>
+            {% for territory in player.territories %}
+            <div class="dist_row">
+                <div class="dist_cell empire_territory empire{{ territory.empire }}">{{territory.name}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

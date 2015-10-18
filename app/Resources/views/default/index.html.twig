@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block native %}
+        <h2>Native</h2>
+        <!--
+            basic table, just because.  Proper implentation is done with the distribution
+        -->
+        <table id="native">
+            {% include 'default/territory_table.html.twig' %}
+        </table>
+{% endblock %}
+
+
+{% block body %}
+    <h2>Distributed</h2>
+    <div id="selected">
+    <div class="capitol_box empire3" data-id="3">Poland<div class="remove_capitol"><a href="#" class="remove_capitol">x</a><input name="capitol[]" data-id="3" value="Poland" type="hidden"></div></div><div class="capitol_box empire1" data-id="1">Paris<div class="remove_capitol"><a href="#" class="remove_capitol">x</a><input name="capitol[]" data-id="1" value="Paris" type="hidden"></div></div><div class="capitol_box empire2" data-id="2">Wales<div class="remove_capitol"><a href="#" class="remove_capitol">x</a><input name="capitol[]" data-id="2" value="Wales" type="hidden"></div></div>
+    </div>
+    <div style="clear: both"></div>
+    {{ form_start(form, {'attr': {'id': 'dist_form'}}) }}
+    Capitol: {{ form_widget(form.capitol, {'attr': {'class': 'capitol', 'placeholder': 'Capitol'}}) }}
+    <br />{{ form_widget(form.randomize, {'attr': {'class': 'randomize_territories'}}) }}
+    {{ form_end(form) }}
+    <div id="distributed">
+    </div>
+    <div id="error_box" title="Error"><div id="error_message">Unknown error</div></div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+#error_box {
+    /* short lag from symfony's dev bar made "Unknown Error" show up at the bottome while it loaded */
+    display: none;
+    visibility: hidden;
+}
+{% for emp in empirecss %}
+    .empire{{ emp.id }} {
+        background-color: #{{ emp.color }};
+        min-width: 120px;
+    }
+{% endfor %}
+</style>
+<link rel="stylesheet" href="{{ asset('css/ui-darkness/jquery-ui-1.10.3.custom.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/jquery-2.0.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-ui-1.10.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/interface.js') }}"></script>
+{% endblock %}
